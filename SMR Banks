@@ -1,0 +1,95 @@
+package Projects;
+
+import java.util.Scanner;
+
+public class SmrBanks {
+
+    public static class MyBanks {
+
+        Scanner sc = new Scanner(System.in);
+        int choose;
+        int choose2;
+        int iaccno;
+        int iaccno2;
+        int dw;
+        String[] name = new String[100];
+        String[] phno = new String[100];
+        double[] amt = new double[100];
+
+        public void front() {
+            for (int i = 1; i <= 100; i++) {
+                System.out.println("Welcome to SMR Banks 🙏🏻✨");
+                System.out.println("Please choose a number from below options : ");
+                System.out.println("1. Create Account     2.Deposit/Withdraw     3.Account Details");
+                choose = sc.nextInt();
+
+                if (choose == 1) {
+                    Scanner nsc = new Scanner(System.in);
+                    System.out.println("Enter your name : ");
+                    name[i] = nsc.nextLine();
+                    System.out.println("Enter your phone number : ");
+                    phno[i] = nsc.nextLine();
+                    System.out.println("Congratulations! Account created successfully!\nYOUR ACC NO IS " + i);
+                    amt[i] = 00;
+                    System.out.println("Your account balance is : " + amt[i]);
+                    try {
+                        Thread.sleep(4000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else if(choose == 2){
+                    Scanner nnsc = new Scanner(System.in);
+                    System.out.println("Enter your account number : ");
+                    iaccno = nnsc.nextInt();
+                    System.out.println("Enter '1' for Deposit OR '2' for Withdraw : ");
+                    choose2 = nnsc.nextInt();
+                    if (choose2 == 1){
+                        System.out.println("Enter amount to be deposit : ");
+                        dw = nnsc.nextInt();
+                        amt[iaccno] += dw;
+                        System.out.println("Amount deposited successfully!");
+                        System.out.println("Your current balance is : " + amt[iaccno]);
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else if (choose2 == 2) {
+                        System.out.println("Enter amount to be withdraw : ");
+                        dw = nnsc.nextInt();
+                        amt[iaccno] -= dw;
+                        System.out.println("Amount withdrawn successfully!");
+                        System.out.println("Your current balance is : " + amt[iaccno]);
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    else {
+                        System.out.println("Please enter a valid account number!");
+                    }
+                }
+                else if(choose == 3){
+                    Scanner nnnsc = new Scanner(System.in);
+                    System.out.println("Enter your account number : ");
+                    iaccno2 = nnnsc.nextInt();
+                    System.out.println("Name : " + name[iaccno2]);
+                    System.out.println("Phone number : " + phno[iaccno2]);
+                    System.out.println("Account Balance : " + amt[iaccno2]);
+                    try {
+                        Thread.sleep(4000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        MyBanks obj = new MyBanks();
+        obj.front();
+    }
+}
