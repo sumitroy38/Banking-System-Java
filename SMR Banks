@@ -11,10 +11,13 @@ public class SmrBanks {
         int choose2;
         int iaccno;
         int iaccno2;
+        int ipin;
+        int iipin;
         int dw;
         String[] name = new String[100];
         String[] phno = new String[100];
         double[] amt = new double[100];
+        int[] pin = new int[100];
 
         public void front() {
             for (int i = 1; i <= 100; i++) {
@@ -29,67 +32,127 @@ public class SmrBanks {
                     name[i] = nsc.nextLine();
                     System.out.println("Enter your phone number : ");
                     phno[i] = nsc.nextLine();
+                    System.out.println("Create your account pin : ");
+                    pin[i] = nsc.nextInt();
                     System.out.println("Congratulations! Account created successfully!\nYOUR ACC NO IS " + i);
                     amt[i] = 00;
                     System.out.println("Your account balance is : " + amt[i]);
+                    System.out.println("<--------------------------------------------------------------------------------->");
                     try {
                         Thread.sleep(4000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                }
-                else if(choose == 2){
+                } else if (choose == 2) {
                     Scanner nnsc = new Scanner(System.in);
                     System.out.println("Enter your account number : ");
                     iaccno = nnsc.nextInt();
-                    System.out.println("Enter '1' for Deposit OR '2' for Withdraw : ");
-                    choose2 = nnsc.nextInt();
-                    if (choose2 == 1){
-                        System.out.println("Enter amount to be deposit : ");
-                        dw = nnsc.nextInt();
-                        amt[iaccno] += dw;
-                        System.out.println("Amount deposited successfully!");
-                        System.out.println("Your current balance is : " + amt[iaccno]);
+                    if (name[iaccno] == null) {
+                        System.out.println("Account not created!");
                         try {
                             Thread.sleep(4000);
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
-                    } else if (choose2 == 2) {
-                        System.out.println("Enter amount to be withdraw : ");
-                        dw = nnsc.nextInt();
-                        amt[iaccno] -= dw;
-                        System.out.println("Amount withdrawn successfully!");
-                        System.out.println("Your current balance is : " + amt[iaccno]);
-                        try {
-                            Thread.sleep(4000);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
+                    } else {
+
+                        System.out.println("Enter your account pin : ");
+                        ipin = nnsc.nextInt();
+                        if (pin[iaccno] == ipin) {
+
+                            System.out.println("Enter '1' for Deposit OR '2' for Withdraw : ");
+                            choose2 = nnsc.nextInt();
+                            if (choose2 == 1) {
+                                System.out.println("Enter amount to be deposit : ");
+                                dw = nnsc.nextInt();
+                                if (dw<0) {
+                                    System.out.println("Amount cannot be in negative !");}
+                                else {
+                                    amt[iaccno] += dw;
+                                    System.out.println("Amount deposited successfully!");
+                                    System.out.println("Your current balance is : " + amt[iaccno]);
+                                    System.out.println("<--------------------------------------------------------------------------------->");
+                                    try {
+                                        Thread.sleep(4000);
+                                    } catch (InterruptedException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                            } else if (choose2 == 2) {
+                                System.out.println("Enter amount to be withdraw : ");
+                                dw = nnsc.nextInt();
+                                if (amt[i] == 0) {
+                                    System.out.println("Insufficient Balance !");
+                                    try {
+                                        Thread.sleep(4000);
+                                    } catch (InterruptedException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                } else {
+
+                                    amt[iaccno] -= dw;
+                                    System.out.println("Amount withdrawn successfully!");
+                                    System.out.println("Your current balance is : " + amt[iaccno]);
+                                    System.out.println("<--------------------------------------------------------------------------------->");
+                                    try {
+                                        Thread.sleep(4000);
+                                    } catch (InterruptedException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
+                            }
+                        } else {
+                            System.out.println("Wrong PIN!!");
+                            try {
+                                Thread.sleep(4000);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
-                    else {
-                        System.out.println("Please enter a valid account number!");
-                    }
-                }
-                else if(choose == 3){
+                } else if (choose == 3) {
                     Scanner nnnsc = new Scanner(System.in);
                     System.out.println("Enter your account number : ");
                     iaccno2 = nnnsc.nextInt();
-                    System.out.println("Name : " + name[iaccno2]);
-                    System.out.println("Phone number : " + phno[iaccno2]);
-                    System.out.println("Account Balance : " + amt[iaccno2]);
-                    try {
-                        Thread.sleep(4000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                    if (name[iaccno2] != null) {
+
+                        System.out.println("Enter your account pin : ");
+                        iipin = nnnsc.nextInt();
+                        if (pin[iaccno2] == iipin) {
+                            System.out.println("Name : " + name[iaccno2]);
+                            System.out.println("Phone number : " + phno[iaccno2]);
+                            System.out.println("Account Balance : " + amt[iaccno2]);
+                            System.out.println("<--------------------------------------------------------------------------------->");
+                            try {
+                                Thread.sleep(4000);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        } else {
+                            System.out.println("Wrong PIN!!");
+                            try {
+                                Thread.sleep(4000);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    } else {
+                        System.out.println("Account not created!");
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
             }
         }
     }
 
+
     public static void main(String[] args) {
         MyBanks obj = new MyBanks();
         obj.front();
     }
 }
+
